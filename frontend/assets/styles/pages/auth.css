@@ -1,8 +1,3 @@
-.site-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
 .auth-page {
   display: flex;
   height: 100dvh;
@@ -15,7 +10,7 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
-  background-color: var(--light-col);
+  background-color: var(--muted-lightest-col);
 }
 .auth-form {
   min-width: 320px;
@@ -29,14 +24,8 @@
 }
 /* Responsiveness */
 @media (max-width: 1024px) {
-  .site-header {
-    position: relative;
-  }
   .auth-page {
     display: block;
-    height: auto;
-    margin-top: 40px;
-    color: var(--light-col);
   }
   .auth-page img {
     width: 100%;
@@ -49,8 +38,18 @@
   .auth-form-container {
     width: auto;
     background-color: transparent;
+    color: var(--light-col);
   }
   .auth-form {
     gap: 10px;
+  }
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.35);
+    z-index: -1;
   }
 }

@@ -1,0 +1,23 @@
+.site-header {
+  position: absolute;
+  background-color: transparent;
+  color: var(--light-col);
+}
+
+.search-container {
+  height: 100vh;
+  background-image: url("../../images/search_bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+}
+.search-options {
+  background-color: #d9d9d986;
+  backdrop-filter: blur(14px);
+  width: 100%;
+  margin-top: auto;
+  padding-block: var(--padding);
+}
