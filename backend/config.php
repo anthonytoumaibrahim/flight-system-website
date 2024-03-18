@@ -2,11 +2,17 @@
 $db_host = "localhost";
 $db_user = "root";
 $db_pass = "";
-$db_name = "flightdb";
+$db_name = "flights_db";
 
 $mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);
 if ($mysqli->connect_error) {
   exit("Connection to MySQL failed. Error: " . $mysqli->connect_error);
+}
+
+// This function allows us to send request data in JSON format
+function getJSONPost()
+{
+  return json_decode(file_get_contents('php://input'), true);
 }
 
 // JWT: https://dev.to/robdwaller/how-to-create-a-json-web-token-using-php-3gml
