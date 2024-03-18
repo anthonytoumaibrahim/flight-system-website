@@ -48,7 +48,7 @@
   align-items: center;
   justify-content: center;
   background-color: var(--primary-col);
-  color: var(--secondary-col);
+  color: var(--light-col);
   border: none;
   font-family: inherit;
   gap: 10px;
@@ -60,17 +60,11 @@
 }
 .flight-type button.active {
   background-color: var(--secondary-col);
-  color: var(--primary-col);
 }
 /* https://codepen.io/sosuke/pen/Pjoqqp */
 .flight-type button img {
-  filter: invert(36%) sepia(100%) saturate(7467%) hue-rotate(247deg)
-    brightness(84%) contrast(86%);
+  filter: invert();
   object-fit: contain;
-}
-.flight-type button.active img {
-  filter: invert(67%) sepia(21%) saturate(6946%) hue-rotate(0deg)
-    brightness(103%) contrast(104%);
 }
 .destination-inputs {
   display: flex;

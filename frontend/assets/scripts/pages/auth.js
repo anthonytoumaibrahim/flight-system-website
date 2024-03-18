@@ -1,3 +1,8 @@
+// If user is already signed in, redirect to home
+if (getLoggedInUser()) {
+  window.location.href = "../index.html";
+}
+
 let authState = "SIGNUP";
 
 // Auth state elements
@@ -34,6 +39,7 @@ const toggleState = () => {
   [inputNameWrapper, inputEmailWrapper, inputPasswordWrapper].forEach((el) =>
     el.classList.remove("form-error")
   );
+  hideResponseMessage();
   if (authState === "SIGNUP") {
     authState = "LOGIN";
     document.title = "Login";
@@ -54,8 +60,7 @@ const toggleState = () => {
 };
 
 const submit = () => {
-  responseMessage.classList.add("hidden");
-  responseMessage.textContent = "";
+  hideResponseMessage();
   const [fullName, email, password] = [
     inputName.value.trim(),
     inputEmail.value.trim(),
@@ -117,7 +122,10 @@ const auth = async (fullName, email, password) => {
     window.location.href = "../index.html";
   } catch (error) {
     authButton.disabled = false;
-    showResponseMessage(true, "Sorry, something went wrong. The error has been logged to the console.");
+    showResponseMessage(
+      true,
+      "Sorry, something went wrong. The error has been logged to the console."
+    );
     console.log(error);
   }
 };
@@ -127,6 +135,10 @@ const showResponseMessage = (error = true, message = "") => {
   responseMessage.classList.remove("hidden");
   responseMessage.classList.toggle("text-error", error);
   responseMessage.classList.toggle("text-success", !error);
+};
+const hideResponseMessage = () => {
+  responseMessage.classList.add("hidden");
+  responseMessage.textContent = "";
 };
 // Set to login if URL has query
 const urlParams = new URLSearchParams(window.location.search);
