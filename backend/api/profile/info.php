@@ -15,7 +15,7 @@ if (!$id) {
   exit(json_encode($response));
 }
 
-$query = mysqli_query($mysqli, "SELECT fullname, email, gender, address, client_phonenumber, client_dob FROM client WHERE client_id={$id}");
+$query = mysqli_query($mysqli, "SELECT fullname, gender, address, client_phonenumber, client_dob FROM client WHERE client_id={$id}");
 $data = $query->fetch_assoc();
 
 $response['success'] = true;

@@ -3,6 +3,7 @@ const API_URL = {
   auth: BASE_API_URL + "/auth.php",
   profile: {
     info: BASE_API_URL + "/profile/info.php",
+    save: BASE_API_URL + "/profile/save.php",
   },
 };
 

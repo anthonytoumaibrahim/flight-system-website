@@ -1,16 +1,8 @@
 const responseMessage = document.getElementById("response-message");
-
+const form = document.querySelector(".info-form");
 // Fields
-const [
-  fullNameInput,
-  emailInput,
-  phoneInput,
-  genderInput,
-  addressInput,
-  dobInput,
-] = [
+const [fullNameInput, phoneInput, genderInput, addressInput, dobInput] = [
   document.getElementById("full_name"),
-  document.getElementById("email"),
   document.getElementById("phone"),
   document.getElementById("gender"),
   document.getElementById("address"),
@@ -31,10 +23,9 @@ const getInfo = async () => {
       );
     }
     // Populate fields
-    const { fullname, email, gender, address, client_phonenumber, client_dob } =
+    const { fullname, gender, address, client_phonenumber, client_dob } =
       data.data;
     fullNameInput.value = fullname;
-    emailInput.value = email;
     genderInput.value = gender ?? "other";
     addressInput.value = address;
     phoneInput.value = client_phonenumber;
@@ -44,6 +35,36 @@ const getInfo = async () => {
     console.log(error);
   }
 };
+
+// Submit form
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  hideResponseMessage();
+  try {
+    const response = await fetch(API_URL.profile.save, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: getLoggedInUser().token,
+      },
+      body: JSON.stringify({
+        name: fullNameInput.value,
+        gender: genderInput.value,
+        address: addressInput.value,
+        phone: phoneInput.value,
+        dob: dobInput.value,
+      }),
+    });
+    const data = await response.json();
+    showResponseMessage(!data.success, data.message);
+  } catch (e) {
+    showResponseMessage(
+      true,
+      "Sorry, something went wrong! The error was logged to console."
+    );
+    console.log(e);
+  }
+});
 
 const showResponseMessage = (error = true, message = "") => {
   responseMessage.textContent = message;
