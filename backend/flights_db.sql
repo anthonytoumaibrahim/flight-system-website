@@ -88,7 +88,7 @@ CREATE TABLE `client` (
   `address` varchar(255) DEFAULT NULL,
   `preferences` varchar(255) DEFAULT NULL,
   `coins_balance` int(11) DEFAULT NULL,
-  `client_phonenumber` int(11) DEFAULT NULL,
+  `client_phonenumber` VARCHAR(255) DEFAULT NULL,
   `client_dob` date DEFAULT NULL,
   `role_id` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
