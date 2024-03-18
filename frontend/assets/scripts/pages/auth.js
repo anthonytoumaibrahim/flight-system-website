@@ -16,6 +16,7 @@ const [
   inputPassword,
   inputPasswordWrapper,
   authButton,
+  responseMessage,
 ] = [
   document.querySelector(".auth-form"),
   document.getElementById("name"),
@@ -25,6 +26,7 @@ const [
   document.getElementById("password"),
   document.getElementById("password").parentElement,
   document.getElementById("auth-button"),
+  document.getElementById("response-message"),
 ];
 
 const toggleState = () => {
@@ -52,7 +54,9 @@ const toggleState = () => {
 };
 
 const submit = () => {
-  const [name, email, password] = [
+  responseMessage.classList.add("hidden");
+  responseMessage.textContent = "";
+  const [fullName, email, password] = [
     inputName.value.trim(),
     inputEmail.value.trim(),
     inputPassword.value,
@@ -60,7 +64,7 @@ const submit = () => {
   // Validation
   let [nameError, emailError, passwordError] = [false, false, false];
 
-  if (authState === "SIGNUP" && name === "") {
+  if (authState === "SIGNUP" && fullName === "") {
     nameError = true;
   }
 
@@ -81,11 +85,49 @@ const submit = () => {
   inputPasswordWrapper.classList.toggle("form-error", passwordError);
 
   if (nameError || emailError || passwordError) return;
-  
+
   // Validation passed
-  
+  auth(fullName, email, password);
 };
 
+const auth = async (fullName, email, password) => {
+  try {
+    authButton.disabled = true;
+    const response = await fetch(API_URL.auth, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        auth_type: authState,
+        name: fullName,
+        email: email,
+        password: password,
+      }),
+    });
+    const data = await response.json();
+    showResponseMessage(!data.success, data.message);
+    if (!data.success) {
+      authButton.disabled = false;
+      return;
+    }
+    // Success, add info to localstorage and redirect to home
+    const { id, token } = data.data;
+    setLoggedInUser(id, token);
+    window.location.href = "../index.html";
+  } catch (error) {
+    authButton.disabled = false;
+    showResponseMessage(true, "Sorry, something went wrong. The error has been logged to the console.");
+    console.log(error);
+  }
+};
+
+const showResponseMessage = (error = true, message = "") => {
+  responseMessage.textContent = message;
+  responseMessage.classList.remove("hidden");
+  responseMessage.classList.toggle("text-error", error);
+  responseMessage.classList.toggle("text-success", !error);
+};
 // Set to login if URL has query
 const urlParams = new URLSearchParams(window.location.search);
 const stateParam = urlParams.get("state");

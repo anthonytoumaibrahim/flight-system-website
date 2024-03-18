@@ -31,15 +31,56 @@
         </nav>
       </div>
     </header>
-    
+
     <section class="search-container">
-      <div class="container">
-        <h1>Let's Fly Today</h1>
+      <div class="search-title container">
+        <h1>Let’s Fly Today</h1>
+        <h1 class="font-bold">Brand Name</h1>
+        <h2>Book your flight easier than ever</h2>
       </div>
-      
+
       <div class="search-options">
+        <!-- Type -->
+        <div class="flight-type">
+          <button class="active">
+            <img
+              src="../assets/images/icons/double_plane.svg"
+              alt="Round Trip"
+            />
+            Round Trip
+          </button>
+          <button>
+            <img src="../assets/images/icons/plane.svg" alt="Trip" />
+            Trip
+          </button>
+          <button>
+            <img src="../assets/images/icons/double_pin.svg" alt="Multi City" />
+            Multi City
+          </button>
+        </div>
         <div class="container">
-          <h1>Content</h1>
+          <!-- Inputs -->
+          <div class="destination-inputs">
+            <div class="form-input-wrapper">
+              <label for="destination-from">From</label>
+              <input
+                type="text"
+                id="destination-from"
+                class="form-input"
+                placeholder="Los Angeles, USA"
+              />
+            </div>
+
+            <div class="form-input-wrapper">
+              <label for="destination-to">To</label>
+              <input
+                type="text"
+                id="destination-to"
+                class="form-input"
+                placeholder="Paris, France"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

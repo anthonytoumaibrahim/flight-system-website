@@ -1,0 +1,6 @@
+.text-error {
+  color: var(--error-col);
+}
+.text-success {
+  color: var(--success-col);
+}

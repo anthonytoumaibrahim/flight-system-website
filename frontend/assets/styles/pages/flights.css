@@ -13,11 +13,69 @@
   flex-direction: column;
   align-items: start;
   justify-content: center;
+  color: var(--light-col);
+}
+.search-title {
+  margin-top: 14%;
+  width: 100%;
+  color: var(--primary-col);
+}
+.search-title h1 {
+  font-weight: normal;
+  font-size: 4rem;
+}
+.search-title h2 {
+  font-weight: normal;
 }
 .search-options {
-  background-color: #d9d9d986;
-  backdrop-filter: blur(14px);
+  position: relative;
+  background-color: hsla(0, 100%, 100%, 20%);
+  backdrop-filter: blur(8px);
   width: 100%;
   margin-top: auto;
   padding-block: var(--padding);
+}
+.flight-type {
+  position: absolute;
+  right: 40px;
+  top: calc(110px / 2 * -1);
+  display: flex;
+  gap: 40px;
+}
+.flight-type button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-col);
+  color: var(--secondary-col);
+  border: none;
+  font-family: inherit;
+  gap: 10px;
+  font-size: 1.05rem;
+  border-radius: 5px;
+  font-weight: bold;
+  width: 108px;
+  height: 110px;
+}
+.flight-type button.active {
+  background-color: var(--secondary-col);
+  color: var(--primary-col);
+}
+/* https://codepen.io/sosuke/pen/Pjoqqp */
+.flight-type button img {
+  filter: invert(36%) sepia(100%) saturate(7467%) hue-rotate(247deg)
+    brightness(84%) contrast(86%);
+  object-fit: contain;
+}
+.flight-type button.active img {
+  filter: invert(67%) sepia(21%) saturate(6946%) hue-rotate(0deg)
+    brightness(103%) contrast(104%);
+}
+.destination-inputs {
+  display: flex;
+  gap: 30px;
+}
+.destination-inputs input {
+  min-width: 320px;
 }

@@ -27,10 +27,6 @@
       <section class="auth-form-container">
         <h1>LOGO HERE</h1>
         <h1 id="auth-title">Create an account</h1>
-        <p>
-          <span id="auth-toggler-text">Already a member?</span>
-          <a href="#" id="auth-toggler">Login instead</a>
-        </p>
         <form action="" class="auth-form">
           <div class="form-input-wrapper">
             <label for="name">Full name</label>
@@ -61,11 +57,15 @@
               placeholder="Must be at least 8 characters long"
             />
           </div>
-
+          <p id="response-message" class="hidden font-bold text-error"></p>
           <button type="submit" class="button button-primary" id="auth-button">
             Create account
           </button>
         </form>
+        <p>
+          <span id="auth-toggler-text">Already a member?</span>
+          <a href="#" id="auth-toggler">Login instead</a>
+        </p>
       </section>
       <img src="../assets/images/auth_bg.jpg" alt="Plane flying overhead" />
       <div class="overlay"></div>
