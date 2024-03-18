@@ -18,10 +18,10 @@
   --light-col: #ffffff;
   --success-col: #16a34a;
   --error-col: #ef4444;
+  --error-light-col: #f87171;
   --error-lightest-col: #fef2f2;
   --warning-col: #d97706;
-
-  /* Font Sizes */
+  
   --font-size-xl: 1.85rem;
   --font-size-lg: 1.65rem;
   --font-size-md: 1.45rem;
@@ -34,6 +34,9 @@
 
   --radius: 10px;
   --radius-sm: 5px;
+  
+  --gap-lg: 40px;
+  --gap-md: 20px;
 }
 
 /* CSS Reset */
@@ -61,6 +64,7 @@ h1 {
   font-size: var(--font-size-xl);
 }
 h2 {
+  line-height: 2;
   font-size: var(--font-size-lg);
 }
 h3 {
@@ -85,9 +89,21 @@ a:hover {
   width: 100%;
   background-color: var(--primary-lightest-col);
   padding-block: var(--padding);
+  margin-bottom: 20px;
 }
 .site-header .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.site-nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.site-nav a {
+  font-size: 1.2rem;
+}
+.site-nav a.active {
+  font-weight: bold;
 }

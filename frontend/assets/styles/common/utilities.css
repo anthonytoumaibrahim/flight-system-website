@@ -4,3 +4,22 @@
 .font-bold {
   font-weight: bold !important;
 }
+.flex {
+  display: flex;
+}
+.row {
+  flex-direction: row;
+}
+.column {
+  flex-direction: column;
+}
+.gap-lg {
+  gap: var(--gap-lg);
+}
+.gap-md {
+  gap: var(--gap-md);
+}
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -117,8 +117,12 @@ const auth = async (fullName, email, password) => {
       return;
     }
     // Success, add info to localstorage and redirect to home
-    const { id, token } = data.data;
-    setLoggedInUser(id, token);
+    const { id, token, role } = data.data;
+    setLoggedInUser(id, token, role);
+    if (role === "admin") {
+      window.location.href = "./admin/index.html";
+      return;
+    }
     window.location.href = "../index.html";
   } catch (error) {
     authButton.disabled = false;

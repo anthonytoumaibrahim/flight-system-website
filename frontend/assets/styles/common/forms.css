@@ -3,6 +3,10 @@
   flex-direction: column;
   gap: 4px;
 }
+.form-radio-wrapper {
+  display: flex;
+  gap: 4px;
+}
 
 .form-input {
   padding: 15px;

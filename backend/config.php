@@ -3,6 +3,8 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 
+header("Content-Type: application/json");
+
 $db_host = "localhost";
 $db_user = "root";
 $db_pass = "";
@@ -14,13 +16,13 @@ if ($mysqli->connect_error) {
 }
 
 // This function allows us to send request data in JSON format
-function getJSONPost()
+function getJSONPost(): array
 {
   return json_decode(file_get_contents('php://input'), true);
 }
 
 // JWT: https://dev.to/robdwaller/how-to-create-a-json-web-token-using-php-3gml
-function makeJWT(array $payload = []): string
+function makeJWT(array|null $payload = []): string
 {
   $header = json_encode(['typ' => 'JWT', 'alg' => 'HS256']);
   $payload = json_encode($payload);
@@ -32,13 +34,17 @@ function makeJWT(array $payload = []): string
   return $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
 }
 
-function verifyJWT(string $token)
+function verifyToken(): string|bool
 {
+  $token = $_SERVER['HTTP_AUTHORIZATION'] ?? "";
   $parts = explode(".", $token);
   if (count($parts) < 3) {
     return false;
   }
   $payload = json_decode(base64_decode($parts[1]), true);
   $ver = makeJWT($payload);
-  return $ver === $token;
+  if ($ver === $token) {
+    return $payload['user_id'];
+  }
+  return false;
 }

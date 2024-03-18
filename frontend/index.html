@@ -25,10 +25,16 @@
   <body>
     <header class="site-header">
       <div class="container">
-        <h1>Logo</h1>
+        <h1>Flight System</h1>
         <nav class="site-nav">
-          <a href="#">Home</a>
+          <a href="#" class="active">Home</a>
           <a href="#">Flights</a>
+          <a href="./pages/profile.html">Profile</a>
+          <a
+            href="./pages/auth.html"
+            class="button button-error button-sm logout-link"
+            >Log out</a
+          >
         </nav>
       </div>
     </header>
@@ -36,7 +42,7 @@
     <section class="search-container">
       <div class="search-title container">
         <h1>Let’s Fly Today</h1>
-        <h1 class="font-bold">Brand Name</h1>
+        <!-- <h1 class="font-bold">Flight System</h1> -->
         <h2>Book your flight easier than ever</h2>
       </div>
 
@@ -60,28 +66,64 @@
           </button>
         </div>
         <div class="container">
-          <!-- Inputs -->
-          <div class="destination-inputs">
-            <div class="form-input-wrapper">
-              <label for="destination-from">From</label>
-              <input
-                type="text"
-                id="destination-from"
-                class="form-input"
-                placeholder="Los Angeles, USA"
-              />
+          <form action="" class="search-form">
+            <!-- Inputs -->
+            <div class="destination-inputs">
+              <div class="form-input-wrapper">
+                <label for="destination-from">From</label>
+                <input
+                  type="text"
+                  id="destination-from"
+                  class="form-input"
+                  placeholder="Los Angeles, USA"
+                />
+              </div>
+
+              <div class="form-input-wrapper">
+                <label for="destination-to">To</label>
+                <input
+                  type="text"
+                  id="destination-to"
+                  class="form-input"
+                  placeholder="Paris, France"
+                />
+              </div>
             </div>
 
-            <div class="form-input-wrapper">
-              <label for="destination-to">To</label>
-              <input
-                type="text"
-                id="destination-to"
-                class="form-input"
-                placeholder="Paris, France"
-              />
+            <div class="flex row gap-lg">
+              <!-- Class -->
+              <div class="flex column gap-md">
+                <h3>Class</h3>
+                <div class="form-radio-wrapper">
+                  <input
+                    type="radio"
+                    name="flight_class"
+                    id="flight_class_business"
+                  />
+                  <label for="flight_class_business">Business Class</label>
+                </div>
+                <div class="form-radio-wrapper">
+                  <input
+                    type="radio"
+                    name="flight_class"
+                    id="flight_class_econo"
+                  />
+                  <label for="flight_class_econo">Economy Class</label>
+                </div>
+              </div>
+              <!-- Dates -->
+              <div class="flex column gap-md">
+                <div class="form-input-wrapper">
+                  <label for="departure-date">Departure Date</label>
+                  <input type="date" id="departure-date" class="form-input" />
+                </div>
+                <div class="form-input-wrapper">
+                  <label for="return-time">Return Time</label>
+                  <input type="date" id="return-time" class="form-input" />
+                </div>
+              </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </section>

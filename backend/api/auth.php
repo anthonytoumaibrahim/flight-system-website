@@ -53,7 +53,8 @@ if ($authType === "SIGNUP") {
     'id' => $id,
     'token' => makeJWT([
       'user_id' => $id
-    ])
+    ]),
+    'role' => 'user'
   ];
   exit(json_encode($response));
 }
@@ -62,7 +63,7 @@ if ($authType === "SIGNUP") {
 if ($authType === "LOGIN") {
 
   // Check if email exists
-  $check_query = $mysqli->prepare("SELECT client_id, password FROM client WHERE email=?");
+  $check_query = $mysqli->prepare("SELECT client.client_id, client.password, role.name AS role_name FROM client, role WHERE client.email=? AND role.role_id=client.role_id");
   $check_query->bind_param("s", $email);
   $check_query->execute();
   $check_query->store_result();
@@ -73,7 +74,7 @@ if ($authType === "LOGIN") {
     exit(json_encode($response));
   }
 
-  $check_query->bind_result($id, $hashed_password);
+  $check_query->bind_result($id, $hashed_password, $role_name);
   $check_query->fetch();
 
   // Check password
@@ -89,7 +90,8 @@ if ($authType === "LOGIN") {
     'id' => $id,
     'token' => makeJWT([
       'user_id' => $id
-    ])
+    ]),
+    'role' => $role_name
   ];
   exit(json_encode($response));
 }

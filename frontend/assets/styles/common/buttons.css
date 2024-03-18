@@ -1,5 +1,5 @@
 .button {
-  padding: 15px;
+  padding: 15px 30px;
   border-radius: var(--radius);
   border: none;
   background-color: var(--light-col);
@@ -8,6 +8,10 @@
   cursor: pointer;
   transition: background-color 0.25s ease;
   font-weight: bold;
+  text-decoration: none !important;
+}
+.button-sm {
+  padding: 10px 20px;
 }
 .button:disabled {
   opacity: 0.5;
@@ -19,4 +23,13 @@
 }
 .button-primary:not(:disabled):hover {
   background-color: var(--secondary-col);
+  color: var(--light-col);
+}
+.button-error {
+  background-color: var(--error-col);
+  color: var(--light-col);
+}
+.button-error:not(:disabled):hover {
+  background-color: var(--error-light-col);
+  color: var(--light-col);
 }

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile | Flight System</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/styles/common/main.css" />
+    <link rel="stylesheet" href="../assets/styles/common/colors.css" />
+    <link rel="stylesheet" href="../assets/styles/common/utilities.css" />
+    <link rel="stylesheet" href="../assets/styles/common/buttons.css" />
+    <link rel="stylesheet" href="../assets/styles/common/forms.css" />
+    <link rel="stylesheet" href="../assets/styles/pages/profile.css" />
+    <!-- Scripts -->
+    <script src="../assets/scripts/main.js" defer></script>
+    <script src="../assets/scripts/pages/profile.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <h1>Flight System</h1>
+        <nav class="site-nav">
+          <a href="../index.html">Home</a>
+          <a href="#">Flights</a>
+          <a href="./profile.html" class="active">Profile</a>
+          <a
+            href="./auth.html"
+            class="button button-error button-sm logout-link"
+            >Log out</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <h2>My Profile</h2>
+      <p>Complete your personal information to start booking flights!</p>
+      <form action="" class="info-form">
+        <div class="form-fields">
+          <div class="form-input-wrapper">
+            <label for="full_name">Full Name</label>
+            <input
+              type="text"
+              id="full_name"
+              class="form-input"
+              placeholder="John Doe"
+            />
+          </div>
+          <div class="form-input-wrapper">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              class="form-input"
+              placeholder="john@email.com"
+            />
+          </div>
+          <div class="form-input-wrapper">
+            <label for="phone">Phone Number</label>
+            <input
+              type="tel"
+              id="phone"
+              class="form-input"
+              placeholder="+1 123 456 7890"
+            />
+          </div>
+          <div class="form-input-wrapper">
+            <label for="gender">Gender</label>
+            <select id="gender" class="form-input">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Prefer not to say</option>
+            </select>
+          </div>
+          <div class="form-input-wrapper">
+            <label for="address">Address</label>
+            <input
+              type="text"
+              id="address"
+              class="form-input"
+              placeholder="1234 Street Name, New York, NY"
+            />
+          </div>
+          <div class="form-input-wrapper">
+            <label for="dob">Birth Date</label>
+            <input
+              type="date"
+              id="dob"
+              class="form-input"
+              placeholder="John Doe"
+            />
+          </div>
+        </div>
+        <p id="response-message" class="hidden"></p>
+        <button type="submit" class="button button-primary">
+          Save Profile
+        </button>
+      </form>
+    </main>
+  </body>
+</html>
