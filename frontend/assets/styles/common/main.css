@@ -15,6 +15,7 @@
   --muted-lighter-col: #e2e8f0;
   --muted-lightest-col: #f8fafc;
 
+  --dark-col: #333333;
   --light-col: #ffffff;
   --success-col: #16a34a;
   --error-col: #ef4444;
@@ -28,6 +29,8 @@
   --font-size-base: 1rem;
   --font-size-sm: 0.85rem;
   --font-size-xs: 0.75rem;
+  
+  --shadow-md: 0 0 14px rgba(0,0,0,0.25);
 
   --padding: 30px;
   --padding-md: 20px;
@@ -87,9 +90,10 @@ a:hover {
 /* Site Header */
 .site-header {
   width: 100%;
-  background-color: var(--primary-lightest-col);
+  background-color: var(--muted-lightest-col);
   padding-block: var(--padding);
   margin-bottom: 20px;
+  box-shadow: var(--shadow-md);
 }
 .site-header .container {
   display: flex;
@@ -101,9 +105,11 @@ a:hover {
   gap: 20px;
   align-items: center;
 }
-.site-nav a {
+.site-nav a:not(.button) {
+  color: var(--dark-col);
   font-size: 1.2rem;
 }
 .site-nav a.active {
+  color: var(--primary-col);
   font-weight: bold;
 }

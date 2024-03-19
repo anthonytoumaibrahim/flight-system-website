@@ -2,12 +2,14 @@
   position: absolute;
   background-color: transparent;
   color: var(--light-col);
+  box-shadow: none;
 }
 .site-nav a {
-  color: var(--light-col);
+  color: var(--light-col) !important;
 }
-.site-nav a:hover, .site-nav a.active {
-  color: var(--primary-col);
+.site-nav a:hover,
+.site-nav a.active {
+  color: var(--primary-col) !important;
 }
 .search-container {
   height: 100vh;
@@ -63,7 +65,8 @@
   width: 108px;
   height: 110px;
 }
-.flight-type button.active, .flight-type button:hover {
+.flight-type button.active,
+.flight-type button:hover {
   background-color: var(--secondary-col);
 }
 /* https://codepen.io/sosuke/pen/Pjoqqp */
@@ -82,4 +85,55 @@
   display: flex;
   flex-direction: column;
   gap: 40px;
+}
+#flights {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.flight-card {
+  border: 1px solid var(--muted-lighter-col);
+  padding: 20px;
+  border-radius: var(--radius);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  box-shadow: var(--shadow-md);
+}
+.flight-card .airline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.flight-card .airline .details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.flight-card .airline .logo {
+  width: 54px;
+  height: 54px;
+  background-color: var(--muted-light-col);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: var(--light-col);
+  text-shadow: var(--shadow-md);
+}
+.flight-card .dates {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1;
+}
+.flight-card .date h3 {
+  font-size: 1.25rem;
+}
+.flight-card .price {
+  color: var(--primary-col);
 }

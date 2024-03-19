@@ -5,6 +5,10 @@ const API_URL = {
     info: BASE_API_URL + "/profile/info.php",
     save: BASE_API_URL + "/profile/save.php",
   },
+  flights: {
+    search: BASE_API_URL + "/searchFlight.php",
+    book: BASE_API_URL + "/booking.php",
+  },
 };
 
 const logoutLinks = document.querySelectorAll(".logout-link");

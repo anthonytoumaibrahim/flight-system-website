@@ -4,3 +4,6 @@
 .text-success {
   color: var(--success-col);
 }
+.text-muted {
+  color: var(--muted-col);
+}

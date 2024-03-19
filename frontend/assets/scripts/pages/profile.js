@@ -1,3 +1,8 @@
+// If user is not signed in, redirect to auth page
+if (!getLoggedInUser()) {
+  window.location.href = "./auth.html";
+}
+
 const responseMessage = document.getElementById("response-message");
 const form = document.querySelector(".info-form");
 // Fields
