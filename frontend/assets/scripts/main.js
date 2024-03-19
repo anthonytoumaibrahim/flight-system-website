@@ -8,6 +8,7 @@ const API_URL = {
   flights: {
     search: BASE_API_URL + "/searchFlight.php",
     book: BASE_API_URL + "/booking.php",
+    history: BASE_API_URL + "/bookinghistory.php",
   },
 };
 

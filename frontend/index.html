@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="./assets/styles/common/buttons.css" />
     <link rel="stylesheet" href="./assets/styles/common/forms.css" />
     <link rel="stylesheet" href="./assets/styles/pages/flights.css" />
+    <link rel="stylesheet" href="./assets/styles/pages/bookings.css" />
     <!-- Scripts -->
     <script src="./assets/scripts/main.js" defer></script>
     <script src="./assets/scripts/pages/index.js" defer></script>
@@ -27,9 +28,9 @@
       <div class="container">
         <h1>Flight System</h1>
         <nav class="site-nav">
-          <a href="#" class="active">Home</a>
-          <a href="#">Flights</a>
+          <a href="./index.html" class="active">Home</a>
           <a href="./pages/profile.html">Profile</a>
+          <a href="./pages/bookings.html">My Bookings</a>
           <a
             href="./pages/auth.html"
             class="button button-error button-sm logout-link"
@@ -90,7 +91,7 @@
               </div>
             </div>
 
-            <div class="flex row gap-lg align-end">
+            <div class="flight-options">
               <!-- Dates -->
               <div class="flex column gap-md">
                 <div class="form-input-wrapper">
@@ -127,11 +128,10 @@
                   />
                 </div>
               </div>
-
-              <button type="submit" class="button button-primary">
-                Search Flights
-              </button>
             </div>
+            <button type="submit" class="button button-primary">
+              Search Flights
+            </button>
           </form>
         </div>
       </div>
