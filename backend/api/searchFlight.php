@@ -30,23 +30,6 @@ $search_criteria = getJSONPost();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    exit('[
-        {
-            "id": 1,
-            "airline_name": "American Airlines",
-            "flight_number": 231,
-            "depart_datetime": "2024-03-22 00:00:00",
-            "arrival_datetime": "2024-03-22 04:00:00",
-            "flight_price": 270,
-            "available_seats": 60,
-            "flight_status": "available",
-            "departure_airport_id": 1,
-            "aircraft_type_id": 1,
-            "arrival_airport_id": 2,
-            "airport_name": "LAX International Airport"
-        }
-    ]');
-
     $requestData = getJSONPost();
 
     $destination = $requestData['destination'];

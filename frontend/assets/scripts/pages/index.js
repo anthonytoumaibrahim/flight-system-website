@@ -28,6 +28,7 @@ form.addEventListener("submit", async (e) => {
   e.preventDefault();
   responseMessage.classList.remove("hidden");
   responseMessage.innerHTML = "";
+  flightsContainer.innerHTML = "";
   const response = await fetch(API_URL.flights.search, {
     method: "POST",
     headers: {
