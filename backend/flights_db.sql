@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2024 at 10:51 PM
+-- Generation Time: Mar 19, 2024 at 05:52 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,6 +32,14 @@ CREATE TABLE `aircraft_type` (
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `aircraft_type`
+--
+
+INSERT INTO `aircraft_type` (`id`, `name`) VALUES
+(1, 'Boeing 777'),
+(2, 'Boeing 737 MAX');
+
 -- --------------------------------------------------------
 
 --
@@ -46,6 +54,14 @@ CREATE TABLE `airport` (
   `timezone` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `airport`
+--
+
+INSERT INTO `airport` (`airport_id`, `airport_name`, `city`, `country`, `timezone`) VALUES
+(1, 'JFK Airport', 'New York', 'USA', 1),
+(2, 'LAX International Airport', 'Los Angeles', 'USA', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -55,7 +71,6 @@ CREATE TABLE `airport` (
 CREATE TABLE `booking` (
   `booking_status` varchar(255) NOT NULL,
   `booking_id` int(11) NOT NULL,
-  `seat_id` int(11) NOT NULL,
   `flight_id` int(11) NOT NULL,
   `client_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -132,8 +147,8 @@ CREATE TABLE `flight` (
   `flight_id` int(11) NOT NULL,
   `airline_name` varchar(255) NOT NULL,
   `flight_number` int(11) NOT NULL,
-  `depart_datetime` int(11) NOT NULL,
-  `arrival_datetime` int(11) NOT NULL,
+  `depart_datetime` datetime NOT NULL,
+  `arrival_datetime` datetime NOT NULL,
   `flight_price` int(11) NOT NULL,
   `available_seats` int(11) NOT NULL,
   `flight_status` char(64) NOT NULL,
@@ -141,6 +156,14 @@ CREATE TABLE `flight` (
   `aircraft_type_id` int(11) NOT NULL,
   `arrival_airport_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `flight`
+--
+
+INSERT INTO `flight` (`flight_id`, `airline_name`, `flight_number`, `depart_datetime`, `arrival_datetime`, `flight_price`, `available_seats`, `flight_status`, `departure_airport_id`, `aircraft_type_id`, `arrival_airport_id`) VALUES
+(1, 'American Airlines', 231, '2024-03-22 00:00:00', '2024-03-22 04:00:00', 270, 60, 'available', 1, 1, 2),
+(2, 'Delta', 642, '2024-03-28 11:00:00', '2024-03-28 21:00:00', 650, 88, 'available', 2, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -229,7 +252,6 @@ ALTER TABLE `airport`
 --
 ALTER TABLE `booking`
   ADD PRIMARY KEY (`booking_id`),
-  ADD KEY `seat_id` (`seat_id`),
   ADD KEY `flight_id` (`flight_id`),
   ADD KEY `client_id` (`client_id`);
 
@@ -305,13 +327,13 @@ ALTER TABLE `seat`
 -- AUTO_INCREMENT for table `aircraft_type`
 --
 ALTER TABLE `aircraft_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `airport`
 --
 ALTER TABLE `airport`
-  MODIFY `airport_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `airport_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `booking`
@@ -347,7 +369,7 @@ ALTER TABLE `faq`
 -- AUTO_INCREMENT for table `flight`
 --
 ALTER TABLE `flight`
-  MODIFY `flight_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `flight_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `payment`
@@ -381,7 +403,6 @@ ALTER TABLE `seat`
 -- Constraints for table `booking`
 --
 ALTER TABLE `booking`
-  ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`seat_id`) REFERENCES `seat` (`seat_id`),
   ADD CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`flight_id`) REFERENCES `flight` (`flight_id`),
   ADD CONSTRAINT `booking_ibfk_3` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`);
 
