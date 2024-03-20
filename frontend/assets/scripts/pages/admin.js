@@ -1,3 +1,8 @@
+// If user isn't admin, redirect to home
+if (getLoggedInUser().role !== "admin") {
+  window.location.href = "../../index.html";
+}
+
 const sideLinksEl = document.querySelectorAll(
   ".sidebar .side-menu li a:not(.logout)"
 );
@@ -90,11 +95,9 @@ function displayBookings(bookings) {
         <td>${id}</td>
         <td>${booking.booking_id}</td>
         <td>${booking.airline_name} ${booking.flight_number}</td>
-        <td>${new Date(
-          booking.depart_datetime
-        ).toLocaleString()} - ${new Date(
-          booking.arrival_datetime
-        ).toLocaleString()}</td>
+        <td>${new Date(booking.depart_datetime).toLocaleString()} - ${new Date(
+      booking.arrival_datetime
+    ).toLocaleString()}</td>
         <td><span class="status completed">Active</span></td>
       `;
     bookingElement.innerHTML = html;
