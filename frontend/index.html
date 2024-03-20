@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="./assets/styles/common/buttons.css" />
     <link rel="stylesheet" href="./assets/styles/common/forms.css" />
     <link rel="stylesheet" href="./assets/styles/pages/flights.css" />
+    <link rel="stylesheet" href="./assets/styles/pages/bookings.css" />
     <!-- Scripts -->
     <script src="./assets/scripts/main.js" defer></script>
     <script src="./assets/scripts/pages/index.js" defer></script>
@@ -25,24 +26,27 @@
   <body>
     <header class="site-header">
       <div class="container">
-        <h1>Flight System</h1>
+        <h1>Flightio</h1>
         <nav class="site-nav">
-          <a href="#" class="active">Home</a>
-          <a href="#">Flights</a>
+          <a href="./index.html" class="active">Home</a>
           <a href="./pages/profile.html">Profile</a>
+          <a href="./pages/bookings.html">My Bookings</a>
           <a
             href="./pages/auth.html"
             class="button button-error button-sm logout-link"
             >Log out</a
           >
         </nav>
+        <button class="menu-hamburger">
+          <img src="./assets/images/icons/bars.svg" />
+        </button>
       </div>
     </header>
 
     <section class="search-container">
       <div class="search-title container">
         <h1>Let’s Fly Today</h1>
-        <!-- <h1 class="font-bold">Flight System</h1> -->
+        <h1 class="font-bold">Flightio</h1>
         <h2>Book your flight easier than ever</h2>
       </div>
 
@@ -90,27 +94,7 @@
               </div>
             </div>
 
-            <div class="flex row gap-lg">
-              <!-- Class -->
-              <div class="flex column gap-md">
-                <h3>Class</h3>
-                <div class="form-radio-wrapper">
-                  <input
-                    type="radio"
-                    name="flight_class"
-                    id="flight_class_business"
-                  />
-                  <label for="flight_class_business">Business Class</label>
-                </div>
-                <div class="form-radio-wrapper">
-                  <input
-                    type="radio"
-                    name="flight_class"
-                    id="flight_class_econo"
-                  />
-                  <label for="flight_class_econo">Economy Class</label>
-                </div>
-              </div>
+            <div class="flight-options">
               <!-- Dates -->
               <div class="flex column gap-md">
                 <div class="form-input-wrapper">
@@ -118,14 +102,48 @@
                   <input type="date" id="departure-date" class="form-input" />
                 </div>
                 <div class="form-input-wrapper">
+                  <label for="return-date">Return Date</label>
+                  <input type="date" id="return-date" class="form-input" />
+                </div>
+              </div>
+              <!-- Times -->
+              <div class="flex column gap-md">
+                <div class="form-input-wrapper">
+                  <label for="departure-time">Departure Time</label>
+                  <input type="time" id="departure-time" class="form-input" />
+                </div>
+                <div class="form-input-wrapper">
                   <label for="return-time">Return Time</label>
-                  <input type="date" id="return-time" class="form-input" />
+                  <input type="time" id="return-time" class="form-input" />
+                </div>
+              </div>
+              <!-- Passengers -->
+              <div class="flex column gap-md">
+                <div class="form-input-wrapper">
+                  <label for="passengers">Passengers</label>
+                  <input
+                    type="number"
+                    min="0"
+                    max="10"
+                    id="passengers"
+                    class="form-input"
+                    placeholder="0-10"
+                  />
                 </div>
               </div>
             </div>
+            <button type="submit" class="button button-primary">
+              Search Flights
+            </button>
           </form>
         </div>
       </div>
+    </section>
+
+    <section class="container hidden padding-y" id="search-result">
+      <h2>Available Flights</h2>
+      <p id="response-message" class="padding-y hidden"></p>
+      <div id="flights"></div>
     </section>
   </body>
 </html>

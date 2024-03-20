@@ -1,0 +1,58 @@
+#flights {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.flight-card {
+  background: linear-gradient(
+    0deg,
+    var(--secondary-lightest-col),
+    var(--primary-lightest-col)
+  );
+  border: 1px solid var(--muted-lighter-col);
+  padding: 20px;
+  border-radius: var(--radius);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  box-shadow: var(--shadow-md);
+}
+.flight-card .airline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 15%;
+  width: 100%;
+}
+.flight-card .airline .details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.flight-card .airline .logo {
+  width: 54px;
+  height: 54px;
+  background-color: var(--muted-light-col);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: var(--light-col);
+  text-shadow: var(--shadow-md);
+}
+.flight-card .dates {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1;
+}
+.flight-card .date h3 {
+  font-size: 1.25rem;
+}
+.flight-card .price {
+  color: var(--primary-col);
+}

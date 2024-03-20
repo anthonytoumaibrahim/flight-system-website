@@ -15,7 +15,7 @@ if (!$id) {
   exit(json_encode($response));
 }
 
-$query = mysqli_query($mysqli, "SELECT fullname, gender, address, client_phonenumber, client_dob FROM client WHERE client_id={$id}");
+$query = mysqli_query($mysqli, "SELECT c.fullname, c.gender, c.address, c.client_phonenumber, c.client_dob, SUM(co.amount) AS coins_amount FROM client c LEFT JOIN coins co on co.client_id = c.client_id AND co.status = 'accepted' WHERE c.client_id={$id}");
 $data = $query->fetch_assoc();
 
 $response['success'] = true;

@@ -4,10 +4,23 @@ const API_URL = {
   profile: {
     info: BASE_API_URL + "/profile/info.php",
     save: BASE_API_URL + "/profile/save.php",
+    requestCoins: BASE_API_URL + "/profile/requestCoins.php",
+  },
+  flights: {
+    search: BASE_API_URL + "/searchFlight.php",
+    book: BASE_API_URL + "/booking.php",
+    history: BASE_API_URL + "/bookinghistory.php",
+  },
+  admin: {
+    fetchBookings: BASE_API_URL + "/bookinginfo.php",
+    countUsers: BASE_API_URL + "/countusers.php",
+    countRevenue: BASE_API_URL + "/countrevenue.php",
   },
 };
 
 const logoutLinks = document.querySelectorAll(".logout-link");
+const menuHamburger = document.querySelector(".menu-hamburger");
+const siteNav = document.querySelector(".site-nav");
 
 const getLoggedInUser = () => {
   const user = JSON.parse(localStorage.user ?? "[]");
@@ -28,6 +41,24 @@ const setLoggedInUser = (id, token, role = "user") => {
   });
 };
 
+const airlinesColors = {
+  A: "#e11d48",
+  D: "#2563eb",
+  R: "#65a30d",
+};
+
+// Utility functions
+const showResponseMessage = (responseElement, error = true, message = "") => {
+  responseElement.textContent = message;
+  responseElement.classList.remove("hidden");
+  responseElement.classList.toggle("text-error", error);
+  responseElement.classList.toggle("text-success", !error);
+};
+const hideResponseMessage = (responseElement) => {
+  responseElement.classList.add("hidden");
+  responseElement.textContent = "";
+};
+
 // Events
 logoutLinks.forEach((element) =>
   element.addEventListener("click", (e) => {
@@ -36,3 +67,15 @@ logoutLinks.forEach((element) =>
     window.location.href = element.href;
   })
 );
+
+menuHamburger?.addEventListener("click", () => {
+  siteNav.classList.toggle("nav-mobile");
+});
+
+// Detect click outside menu to hide it
+// Thanks to: https://stackoverflow.com/a/28432139
+document.addEventListener("click", (e) => {
+  if (!siteNav?.contains(e.target) && !menuHamburger?.contains(e.target)) {
+    siteNav?.classList.toggle("nav-mobile", false);
+  }
+});

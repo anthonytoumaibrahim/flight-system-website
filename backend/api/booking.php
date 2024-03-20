@@ -1,24 +1,32 @@
 <?php
+require_once("../config.php");
 
-include("config.php");
+// Verify user
+$id = verifyToken();
 
-$fullname = $_POST['fullname'];
-$email = $_POST['email'];
-$flightId = $_POST['flight_id'];
-$seatId = $_POST['seat_id'];
-$amount = $_POST['amount'];
-$paymentMethod = $_POST['payment_method'];
-
-
-$insertClientQuery = "INSERT INTO client (fullname, email) VALUES ('$fullname', '$email')";
-if ($mysqli->query($insertClientQuery)) {
-    $clientId = $mysqli->insert_id;
-} else {
-    echo "Error: " . $insertClientQuery . "<br>" . $mysqli->error;
+if (!$id) {
+    exit(json_encode(['error' => 'Unauthorized user.']));
 }
 
+$data = getJSONPost();
+
+$fullname = $data['fullname'] ?? "";
+$email = $data['email'] ?? "";
+$flightId = $data['flight_id'] ?? "";
+// $seatId = $data['seat_id'] ?? 1;
+$amount = $data['amount'] ?? 0;
+$paymentMethod = $data['payment_method'] ?? "";
+
+
+// $insertClientQuery = "INSERT INTO client (fullname, email) VALUES ('$fullname', '$email')";
+// if ($mysqli->query($insertClientQuery)) {
+//     $id = $mysqli->insert_id;
+// } else {
+//     echo "Error: " . $insertClientQuery . "<br>" . $mysqli->error;
+// }
+
 $bookingStatus = "Confirmed";
-$insertBookingQuery = "INSERT INTO booking (booking_status, seat_id, flight_id, client_id) VALUES ('$bookingStatus', $seatId, $flightId, $clientId)";
+$insertBookingQuery = "INSERT INTO booking (booking_status, flight_id, client_id) VALUES ('$bookingStatus', $flightId, $id)";
 
 if ($mysqli->query($insertBookingQuery)) {
     $bookingId = $mysqli->insert_id;
@@ -26,26 +34,18 @@ if ($mysqli->query($insertBookingQuery)) {
     echo "Error: " . $insertBookingQuery . "<br>" . $mysqli->error;
 }
 
-$updateSeatQuery = "UPDATE seat SET status = 'Booked' WHERE seat_id = $seatId";
-if ($mysqli->query($updateSeatQuery)) {
-    echo "Seat updated successfully";
-} else {
-    echo "Error: " . $updateSeatQuery . "<br>" . $mysqli->error;
-}
+// $updateSeatQuery = "UPDATE seat SET status = 'Booked' WHERE seat_id = $seatId";
+// if ($mysqli->query($updateSeatQuery)) {
+//     echo "Seat updated successfully";
+// } else {
+//     echo "Error: " . $updateSeatQuery . "<br>" . $mysqli->error;
+// }
 
 $paymentStatus = "Success";
 $insertPaymentQuery = "INSERT INTO payment (amount, status, method, booking_id) 
 VALUES ($amount, '$paymentStatus', '$paymentMethod', $bookingId)";
-if ($mysqli->query($insertPaymentQuery)) {
-    echo "Payment processed successfully";
-} else {
-    echo "Error: " . $insertPaymentQuery . "<br>" . $mysqli->error;
-}
+$mysqli->query($insertPaymentQuery);
 
 $mysqli->close();
 
 echo "Booking successful!";
-
-
-
-

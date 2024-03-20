@@ -25,17 +25,20 @@
   <body>
     <header class="site-header">
       <div class="container">
-        <h1>Flight System</h1>
+        <h1>Flightio</h1>
         <nav class="site-nav">
           <a href="../index.html">Home</a>
-          <a href="#">Flights</a>
           <a href="./profile.html" class="active">Profile</a>
+          <a href="./bookings.html">My Bookings</a>
           <a
             href="./auth.html"
             class="button button-error button-sm logout-link"
             >Log out</a
           >
         </nav>
+        <button class="menu-hamburger">
+          <img src="../assets/images/icons/bars.svg" />
+        </button>
       </div>
     </header>
 
@@ -93,6 +96,28 @@
         <button type="submit" class="button button-primary">
           Save Profile
         </button>
+      </form>
+
+      <hr />
+      <h2>Request Coins</h2>
+      <p>
+        Enter the amount of coins that you would like to request. Current coins
+        count: <strong class="coins-balance">0</strong>
+      </p>
+      <form action="" class="coin-form">
+        <div class="form-fields margin-y">
+          <div class="form-input-wrapper">
+            <label for="coins">Amount</label>
+            <input
+              type="number"
+              id="coins"
+              class="form-input"
+              placeholder="1000"
+            />
+          </div>
+        </div>
+        <p class="hidden margin-y" id="coins-response"></p>
+        <button type="submit" class="button button-primary">Request</button>
       </form>
     </main>
   </body>

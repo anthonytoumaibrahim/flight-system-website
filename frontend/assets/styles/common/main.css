@@ -15,13 +15,14 @@
   --muted-lighter-col: #e2e8f0;
   --muted-lightest-col: #f8fafc;
 
+  --dark-col: #333333;
   --light-col: #ffffff;
   --success-col: #16a34a;
   --error-col: #ef4444;
   --error-light-col: #f87171;
   --error-lightest-col: #fef2f2;
   --warning-col: #d97706;
-  
+
   --font-size-xl: 1.85rem;
   --font-size-lg: 1.65rem;
   --font-size-md: 1.45rem;
@@ -29,12 +30,14 @@
   --font-size-sm: 0.85rem;
   --font-size-xs: 0.75rem;
 
+  --shadow-md: 0 0 14px rgba(0, 0, 0, 0.25);
+
   --padding: 30px;
   --padding-md: 20px;
 
   --radius: 10px;
   --radius-sm: 5px;
-  
+
   --gap-lg: 40px;
   --gap-md: 20px;
 }
@@ -83,13 +86,19 @@ a:hover {
   margin-inline: auto;
   padding-inline: var(--padding);
 }
-
+hr {
+  border-top: 1px solid var(--muted-lighter-col-col);
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
 /* Site Header */
 .site-header {
   width: 100%;
-  background-color: var(--primary-lightest-col);
+  background-color: var(--muted-lightest-col);
   padding-block: var(--padding);
   margin-bottom: 20px;
+  box-shadow: var(--shadow-md);
+  position: relative;
 }
 .site-header .container {
   display: flex;
@@ -101,9 +110,51 @@ a:hover {
   gap: 20px;
   align-items: center;
 }
-.site-nav a {
+.site-nav a:not(.button) {
+  color: var(--dark-col);
   font-size: 1.2rem;
 }
 .site-nav a.active {
+  color: var(--primary-col);
   font-weight: bold;
+}
+.menu-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.menu-hamburger img {
+  width: 44px;
+  height: 44px;
+}
+.nav-mobile {
+  display: flex !important;
+  background-color: var(--light-col);
+  color: var(--dark-col);
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  left: 0;
+  padding: 40px;
+  flex-direction: column;
+  z-index: 2;
+  box-shadow: var(--shadow-md);
+}
+/* Responsiveness */
+@media (max-width: 1024px) {
+  .site-nav a:not(.button) {
+    font-size: 1rem;
+  }
+  .site-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+  }
+  .menu-hamburger {
+    display: block;
+  }
+  .site-nav {
+    display: none;
+  }
 }
