@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2024 at 05:52 PM
+-- Generation Time: Mar 20, 2024 at 10:38 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -60,7 +60,8 @@ CREATE TABLE `airport` (
 
 INSERT INTO `airport` (`airport_id`, `airport_name`, `city`, `country`, `timezone`) VALUES
 (1, 'JFK Airport', 'New York', 'USA', 1),
-(2, 'LAX International Airport', 'Los Angeles', 'USA', 1);
+(2, 'LAX International Airport', 'Los Angeles', 'USA', 1),
+(3, 'Rafic Hariri International Airport', 'Beirut', 'Lebanon', 2);
 
 -- --------------------------------------------------------
 
@@ -74,6 +75,19 @@ CREATE TABLE `booking` (
   `flight_id` int(11) NOT NULL,
   `client_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `booking`
+--
+
+INSERT INTO `booking` (`booking_status`, `booking_id`, `flight_id`, `client_id`) VALUES
+('Confirmed', 9, 1, 1),
+('Confirmed', 10, 1, 1),
+('Confirmed', 11, 1, 1),
+('Confirmed', 12, 3, 1),
+('Confirmed', 13, 3, 1),
+('Confirmed', 14, 2, 1),
+('Confirmed', 15, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -108,6 +122,14 @@ CREATE TABLE `client` (
   `role_id` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `client`
+--
+
+INSERT INTO `client` (`fullname`, `email`, `password`, `client_id`, `gender`, `address`, `preferences`, `coins_balance`, `client_phonenumber`, `client_dob`, `role_id`) VALUES
+('Mildred', 'millie@gmail.com', '$2y$10$ukZ6SrFCASfKHz2/w0gIbu.XMM8CYy.f85DNrHN8EUZJ5H3F6bDRu', 1, 'female', 'First Skyline Street, California', NULL, NULL, '+1 123333333', '2024-03-08', 1),
+('Anthony', 'anthony@gmail.com', '$2y$10$BSFAWDwzrlH9T1EaUgece.VXHb1Sqksm2p.rl2WQ2htLEW1D9KOka', 2, 'male', 'Some Street, Lebanon', NULL, NULL, '+961 81000000', '2000-08-29', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -121,6 +143,16 @@ CREATE TABLE `coins` (
   `timestamp` int(11) NOT NULL,
   `client_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `coins`
+--
+
+INSERT INTO `coins` (`request_id`, `amount`, `status`, `timestamp`, `client_id`) VALUES
+(3, 899, 'sent', 1710943790, 2),
+(4, 55, 'sent', 1710943811, 2),
+(5, 656, 'accepted', 1710944332, 1),
+(6, 65, 'sent', 1710970096, 1);
 
 -- --------------------------------------------------------
 
@@ -162,8 +194,11 @@ CREATE TABLE `flight` (
 --
 
 INSERT INTO `flight` (`flight_id`, `airline_name`, `flight_number`, `depart_datetime`, `arrival_datetime`, `flight_price`, `available_seats`, `flight_status`, `departure_airport_id`, `aircraft_type_id`, `arrival_airport_id`) VALUES
-(1, 'American Airlines', 231, '2024-03-22 00:00:00', '2024-03-22 04:00:00', 270, 60, 'available', 1, 1, 2),
-(2, 'Delta', 642, '2024-03-28 11:00:00', '2024-03-28 21:00:00', 650, 88, 'available', 2, 2, 1);
+(1, 'American Airlines', 33, '2024-03-28 11:00:00', '2024-03-28 21:00:00', 544, 60, 'available', 1, 1, 2),
+(2, 'Delta', 642, '2024-03-28 11:00:00', '2024-03-28 21:00:00', 650, 88, 'available', 2, 2, 1),
+(3, 'RyanAir', 22, '2024-03-28 11:00:00', '2024-03-28 21:00:00', 322, 45, 'available', 2, 2, 1),
+(4, 'American Airlines', 555, '2024-03-28 11:00:00', '2024-03-28 21:00:00', 500, 2, 'available', 2, 2, 1),
+(5, 'MEA', 677, '2024-03-21 02:00:00', '2024-03-21 14:00:00', 2000, 102, 'available', 2, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -179,6 +214,19 @@ CREATE TABLE `payment` (
   `timestamp` int(11) NOT NULL,
   `booking_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`payment_id`, `amount`, `status`, `method`, `timestamp`, `booking_id`) VALUES
+(1, 270, 'Success', 'credit_card', 0, 9),
+(2, 270, 'Success', 'credit_card', 0, 10),
+(3, 270, 'Success', 'credit_card', 0, 11),
+(4, 322, 'Success', 'credit_card', 0, 12),
+(5, 322, 'Success', 'credit_card', 0, 13),
+(6, 650, 'Success', 'credit_card', 0, 14),
+(7, 322, 'Success', 'credit_card', 0, 15);
 
 -- --------------------------------------------------------
 
@@ -333,13 +381,13 @@ ALTER TABLE `aircraft_type`
 -- AUTO_INCREMENT for table `airport`
 --
 ALTER TABLE `airport`
-  MODIFY `airport_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `airport_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `chats`
@@ -351,13 +399,13 @@ ALTER TABLE `chats`
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `coins`
 --
 ALTER TABLE `coins`
-  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `faq`
@@ -369,13 +417,13 @@ ALTER TABLE `faq`
 -- AUTO_INCREMENT for table `flight`
 --
 ALTER TABLE `flight`
-  MODIFY `flight_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `flight_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `review`
