@@ -30,18 +30,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $requestData = getJSONPost();
 
-    $destination = $requestData['destination'];
-    $departureDate = $requestData['departureDate'];
-    $departureTime = $requestData['departureTime'];
-    $arrivalDate = $requestData['arrivalDate'];
-    $arrivalTime = $requestData['arrivalTime'];
-    $numPassengers = $requestData['numPassengers'];
+    $departure = $requestData['departure'] ?? "";
+    $destination = $requestData['destination'] ?? "";
+    $departureDate = $requestData['departureDate'] ?? "";
+    $departureTime = $requestData['departureTime'] ?? "";
+    $arrivalDate = $requestData['arrivalDate'] ?? "";
+    $arrivalTime = $requestData['arrivalTime'] ?? "";
+    $numPassengers = $requestData['numPassengers'] ?? 0;
 
-    $query = $mysqli->prepare("SELECT f.*, a.airport_name FROM flight f, airport a WHERE a.city = ? AND  DATE(f.depart_datetime) = ? AND TIME(f.depart_datetime) >= ? AND DATE(f.arrival_datetime) = ? AND TIME(f.arrival_datetime) <= ? AND f.available_seats >= ?");
-    $query->bind_param("sssssi", $destination, $departureDate, $departureTime, $arrivalDate, $arrivalTime, $numPassengers);
+    $query = $mysqli->prepare("SELECT f.*, dep.airport_name as departure_airport_name, arr.airport_name as arrival_airport_name FROM flight f LEFT JOIN airport dep ON f.departure_airport_id = dep.airport_id LEFT JOIN airport arr ON f.arrival_airport_id = arr.airport_id WHERE dep.city = ? AND arr.city = ? AND DATE(f.depart_datetime) = ? AND TIME(f.depart_datetime) >= ? AND DATE(f.arrival_datetime) = ? AND TIME(f.arrival_datetime) <= ? AND f.available_seats >= ?");
+    $query->bind_param("ssssssi", $departure, $destination, $departureDate, $departureTime, $arrivalDate, $arrivalTime, $numPassengers);
     $query->execute();
     $query->store_result();
-    $query->bind_result($id, $airline_name, $flight_number, $depart_datetime, $arrival_datetime, $flight_price, $available_seats, $flight_status, $departure_airport_id, $aircraft_type_id, $arrival_airport_id, $airport_name);
+    $query->bind_result($id, $airline_name, $flight_number, $depart_datetime, $arrival_datetime, $flight_price, $available_seats, $flight_status, $departure_airport_id, $aircraft_type_id, $arrival_airport_id, $airport_name, $arrival_airport_name);
 
     $flights = [];
     while ($query->fetch()) {

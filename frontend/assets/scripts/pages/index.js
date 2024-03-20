@@ -9,6 +9,7 @@ const responseMessage = document.getElementById("response-message");
 const form = document.querySelector(".search-form");
 // Fields
 const [
+  destinationFromInput,
   destinationToInput,
   departureDateInput,
   departureTimeInput,
@@ -16,6 +17,7 @@ const [
   returnTimeInput,
   passengersInput,
 ] = [
+  document.getElementById("destination-from"),
   document.getElementById("destination-to"),
   document.getElementById("departure-date"),
   document.getElementById("departure-time"),
@@ -36,6 +38,7 @@ form.addEventListener("submit", async (e) => {
       Authorization: getLoggedInUser().token,
     },
     body: JSON.stringify({
+      departure: destinationFromInput.value,
       destination: destinationToInput.value,
       departureDate: departureDateInput.value,
       departureTime: departureTimeInput.value,
