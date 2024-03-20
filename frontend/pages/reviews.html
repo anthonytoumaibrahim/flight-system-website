@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Bookings | Flight System</title>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+  <!-- Styles -->
+  <link rel="stylesheet" href="../assets/styles/common/main.css" />
+  <link rel="stylesheet" href="../assets/styles/common/colors.css" />
+  <link rel="stylesheet" href="../assets/styles/common/utilities.css" />
+  <link rel="stylesheet" href="../assets/styles/common/buttons.css" />
+  <link rel="stylesheet" href="../assets/styles/common/forms.css" />
+  <link rel="stylesheet" href="../assets/styles/pages/bookings.css" />
+  <style>
+    
+    form {
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      height: 100px;
+    }
+
+    button[type="submit"] {
+      background-color: #4338ca;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #4338ca;
+    }
+
+    #flights {
+      margin-top: 20px;
+    }
+
+    .review {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .review h3 {
+      margin-top: 0;
+    }
+
+    .review p {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>Flight System</h1>
+      <nav class="site-nav">
+        <a href="../index.html">Home</a>
+        <a href="./profile.html">Profile</a>
+        <a href="./bookings.html">My Bookings</a>
+        <a href="./reviews.html" class="active">Reviews</a>
+        <a href="./auth.html" class="button button-error button-sm logout-link">Log out</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2>My Reviews</h2>
+    <p id="response-message">Review your flights </p>
+    <div id="flights"></div>
+
+    <form id="add-review-form">
+      <label for="flight">Flight:</label>
+      <input type="text" id="flight" name="flight" required><br>
+
+      <label for="rating">Rating:</label>
+      <select id="rating" name="rating">
+        <option value="1">1</option>
+        <option value="1.5">1.5</option>
+        <option value="2">2</option>
+        <option value="2.5">2.5</option>
+        <option value="3">3</option>
+        <option value="3.5">3.5</option>
+        <option value="4">4</option>
+        <option value="4.5">4.5</option>
+        <option value="5">5</option>
+      </select><br>
+
+      <label for="review">Review:</label>
+      <textarea id="review" name="review" rows="4" cols="50" required></textarea><br>
+
+      <label for="status">Status:</label>
+      <input type="text" id="status" name="status" required><br>
+
+      <label for="flag-reasons">Flagged Reasons:</label>
+      <textarea id="flag-reasons" name="flag-reasons" rows="4" cols="50"></textarea><br>
+
+      <button type="submit">Submit Review</button>
+    </form>
+  </main>
+
+  <script src="../assets/scripts/main.js" defer></script>
+  <!--script src="../assets/scripts/pages/reviews.js" defer></script-->
+</body>
+</html>
