@@ -82,3 +82,33 @@ function fetchUserCount() {
   
   document.addEventListener('DOMContentLoaded', fetchUserCount);
   
+
+function fetchTotalRevenue() {
+    fetch('countrevenue.php', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to fetch total revenue');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Total revenue:', data.total_revenue);
+      displayTotalRevenue(data.total_revenue);
+    })
+    .catch(error => {
+      console.error('Error fetching total revenue:', error.message);
+    });
+  }
+  
+  function displayTotalRevenue(totalRevenue) {
+    const totalRevenueElement = document.getElementById('total-revenue');
+    totalRevenueElement.textContent = totalRevenue;
+  }
+  
+  document.addEventListener('DOMContentLoaded', fetchTotalRevenue);
+  
