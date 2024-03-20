@@ -47,9 +47,14 @@ const generateFlightCard = ({
   seats,
   airport,
 }) => {
+  const airlineLetter = airline.substr(0, 1).toUpperCase();
   return `<div class="flight-card">
   <div class="airline">
-    <div class="logo">${airline.substr(0, 1).toUpperCase()}</div>
+    <div class="logo" style="${
+      airlinesColors[airlineLetter]
+        ? `background-color:${airlinesColors[airlineLetter]};`
+        : ""
+    }">${airlineLetter}</div>
     <div class="details">
       <p class="font-bold">${airline}</p>
     </div>

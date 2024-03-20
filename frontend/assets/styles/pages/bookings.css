@@ -4,6 +4,11 @@
   gap: 40px;
 }
 .flight-card {
+  background: linear-gradient(
+    0deg,
+    var(--secondary-lightest-col),
+    var(--primary-lightest-col)
+  );
   border: 1px solid var(--muted-lighter-col);
   padding: 20px;
   border-radius: var(--radius);

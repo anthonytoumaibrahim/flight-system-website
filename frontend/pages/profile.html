@@ -94,6 +94,28 @@
           Save Profile
         </button>
       </form>
+
+      <hr />
+      <h2>Request Coins</h2>
+      <p>
+        Enter the amount of coins that you would like to request. Current coins
+        count: <strong class="coins-balance">0</strong>
+      </p>
+      <form action="" class="coin-form">
+        <div class="form-fields margin-y">
+          <div class="form-input-wrapper">
+            <label for="coins">Amount</label>
+            <input
+              type="number"
+              id="coins"
+              class="form-input"
+              placeholder="1000"
+            />
+          </div>
+        </div>
+        <p class="hidden margin-y" id="coins-response"></p>
+        <button type="submit" class="button button-primary">Request</button>
+      </form>
     </main>
   </body>
 </html>

@@ -39,7 +39,7 @@ const toggleState = () => {
   [inputNameWrapper, inputEmailWrapper, inputPasswordWrapper].forEach((el) =>
     el.classList.remove("form-error")
   );
-  hideResponseMessage();
+  hideResponseMessage(responseMessage);
   if (authState === "SIGNUP") {
     authState = "LOGIN";
     document.title = "Login";
@@ -60,7 +60,7 @@ const toggleState = () => {
 };
 
 const submit = () => {
-  hideResponseMessage();
+  hideResponseMessage(responseMessage);
   const [fullName, email, password] = [
     inputName.value.trim(),
     inputEmail.value.trim(),
@@ -111,7 +111,7 @@ const auth = async (fullName, email, password) => {
       }),
     });
     const data = await response.json();
-    showResponseMessage(!data.success, data.message);
+    showResponseMessage(responseMessage, !data.success, data.message);
     if (!data.success) {
       authButton.disabled = false;
       return;
@@ -127,22 +127,12 @@ const auth = async (fullName, email, password) => {
   } catch (error) {
     authButton.disabled = false;
     showResponseMessage(
+      responseMessage,
       true,
       "Sorry, something went wrong. The error has been logged to the console."
     );
     console.log(error);
   }
-};
-
-const showResponseMessage = (error = true, message = "") => {
-  responseMessage.textContent = message;
-  responseMessage.classList.remove("hidden");
-  responseMessage.classList.toggle("text-error", error);
-  responseMessage.classList.toggle("text-success", !error);
-};
-const hideResponseMessage = () => {
-  responseMessage.classList.add("hidden");
-  responseMessage.textContent = "";
 };
 // Set to login if URL has query
 const urlParams = new URLSearchParams(window.location.search);

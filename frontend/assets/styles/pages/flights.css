@@ -12,7 +12,7 @@
   color: var(--primary-col) !important;
 }
 .search-container {
-  height: 100vh;
+  min-height: 100vh;
   background-image: url("../../images/search_bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
@@ -23,7 +23,7 @@
   color: var(--light-col);
 }
 .search-title {
-  margin-top: 14%;
+  margin-top: 120px;
   width: 100%;
   color: var(--primary-col);
 }
@@ -98,7 +98,6 @@
   }
   .search-title {
     margin-bottom: 40px;
-    margin-top: 30%;
   }
   .search-title h1 {
     font-size: 3rem;

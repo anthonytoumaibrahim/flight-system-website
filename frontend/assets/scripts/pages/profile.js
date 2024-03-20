@@ -5,6 +5,8 @@ if (!getLoggedInUser()) {
 
 const responseMessage = document.getElementById("response-message");
 const form = document.querySelector(".info-form");
+const coinForm = document.querySelector(".coin-form");
+const coinResponse = document.getElementById("coins-response");
 // Fields
 const [fullNameInput, phoneInput, genderInput, addressInput, dobInput] = [
   document.getElementById("full_name"),
@@ -28,23 +30,37 @@ const getInfo = async () => {
       );
     }
     // Populate fields
-    const { fullname, gender, address, client_phonenumber, client_dob } =
-      data.data;
+    const {
+      fullname,
+      gender,
+      address,
+      client_phonenumber,
+      client_dob,
+      coins_amount,
+    } = data.data;
     fullNameInput.value = fullname;
     genderInput.value = gender ?? "other";
     addressInput.value = address;
     phoneInput.value = client_phonenumber;
     dobInput.value = client_dob;
+
+    document
+      .querySelectorAll(".coins-balance")
+      .forEach((el) => (coins_amount ? (el.innerHTML = coins_amount) : ""));
   } catch (error) {
-    showResponseMessage(true, error);
+    showResponseMessage(
+      responseMessage,
+      true,
+      "Sorry, something went wrong! The error was logged to console."
+    );
     console.log(error);
   }
 };
 
-// Submit form
+// Submit profile form
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  hideResponseMessage();
+  hideResponseMessage(responseMessage);
   try {
     const response = await fetch(API_URL.profile.save, {
       method: "POST",
@@ -61,9 +77,10 @@ form.addEventListener("submit", async (e) => {
       }),
     });
     const data = await response.json();
-    showResponseMessage(!data.success, data.message);
+    showResponseMessage(responseMessage, !data.success, data.message);
   } catch (e) {
     showResponseMessage(
+      responseMessage,
       true,
       "Sorry, something went wrong! The error was logged to console."
     );
@@ -71,15 +88,33 @@ form.addEventListener("submit", async (e) => {
   }
 });
 
-const showResponseMessage = (error = true, message = "") => {
-  responseMessage.textContent = message;
-  responseMessage.classList.remove("hidden");
-  responseMessage.classList.toggle("text-error", error);
-  responseMessage.classList.toggle("text-success", !error);
-};
-const hideResponseMessage = () => {
-  responseMessage.classList.add("hidden");
-  responseMessage.textContent = "";
-};
+// Submit coin form
+coinForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const val = document.getElementById("coins").value;
+  hideResponseMessage(coinResponse);
+  try {
+    const response = await fetch(API_URL.profile.requestCoins, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: getLoggedInUser().token,
+      },
+      body: JSON.stringify({
+        amount: val,
+      }),
+    });
+    const data = await response.json();
+    coinForm.reset();
+    showResponseMessage(coinResponse, !data.success, data.message);
+  } catch (e) {
+    showResponseMessage(
+      coinResponse,
+      true,
+      "Sorry, your coin request couldn't be sent. The error has been logged to the console."
+    );
+    console.log(e);
+  }
+});
 
 getInfo();

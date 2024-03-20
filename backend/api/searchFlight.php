@@ -26,8 +26,6 @@ if (!$allowed_to_search) {
     exit(json_encode(['error' => 'Please make sure to fill in all your personal information before searching for flights! <a href="./pages/profile.html">Fill out information now</a>']));
 }
 
-$search_criteria = getJSONPost();
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $requestData = getJSONPost();

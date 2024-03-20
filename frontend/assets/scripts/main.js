@@ -4,6 +4,7 @@ const API_URL = {
   profile: {
     info: BASE_API_URL + "/profile/info.php",
     save: BASE_API_URL + "/profile/save.php",
+    requestCoins: BASE_API_URL + "/profile/requestCoins.php",
   },
   flights: {
     search: BASE_API_URL + "/searchFlight.php",
@@ -31,6 +32,24 @@ const setLoggedInUser = (id, token, role = "user") => {
     token: token,
     role: role,
   });
+};
+
+const airlinesColors = {
+  A: "#e11d48",
+  D: "#2563eb",
+  R: "#65a30d",
+};
+
+// Utility functions
+const showResponseMessage = (responseElement, error = true, message = "") => {
+  responseElement.textContent = message;
+  responseElement.classList.remove("hidden");
+  responseElement.classList.toggle("text-error", error);
+  responseElement.classList.toggle("text-success", !error);
+};
+const hideResponseMessage = (responseElement) => {
+  responseElement.classList.add("hidden");
+  responseElement.textContent = "";
 };
 
 // Events

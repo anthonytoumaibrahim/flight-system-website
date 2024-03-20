@@ -22,22 +22,22 @@
   --error-light-col: #f87171;
   --error-lightest-col: #fef2f2;
   --warning-col: #d97706;
-  
+
   --font-size-xl: 1.85rem;
   --font-size-lg: 1.65rem;
   --font-size-md: 1.45rem;
   --font-size-base: 1rem;
   --font-size-sm: 0.85rem;
   --font-size-xs: 0.75rem;
-  
-  --shadow-md: 0 0 14px rgba(0,0,0,0.25);
+
+  --shadow-md: 0 0 14px rgba(0, 0, 0, 0.25);
 
   --padding: 30px;
   --padding-md: 20px;
 
   --radius: 10px;
   --radius-sm: 5px;
-  
+
   --gap-lg: 40px;
   --gap-md: 20px;
 }
@@ -86,7 +86,11 @@ a:hover {
   margin-inline: auto;
   padding-inline: var(--padding);
 }
-
+hr {
+  border-top: 1px solid var(--muted-lighter-col-col);
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
 /* Site Header */
 .site-header {
   width: 100%;
@@ -112,4 +116,10 @@ a:hover {
 .site-nav a.active {
   color: var(--primary-col);
   font-weight: bold;
+}
+/* Responsiveness */
+@media (max-width: 1024px) {
+  .site-nav a:not(.button) {
+    font-size: 1rem;
+  }
 }
