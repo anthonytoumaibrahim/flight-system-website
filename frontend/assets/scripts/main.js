@@ -14,6 +14,8 @@ const API_URL = {
 };
 
 const logoutLinks = document.querySelectorAll(".logout-link");
+const menuHamburger = document.querySelector(".menu-hamburger");
+const siteNav = document.querySelector(".site-nav");
 
 const getLoggedInUser = () => {
   const user = JSON.parse(localStorage.user ?? "[]");
@@ -60,3 +62,15 @@ logoutLinks.forEach((element) =>
     window.location.href = element.href;
   })
 );
+
+menuHamburger.addEventListener("click", () => {
+  siteNav.classList.toggle("nav-mobile");
+});
+
+// Detect click outside menu to hide it
+// Thanks to: https://stackoverflow.com/a/28432139
+document.addEventListener("click", (e) => {
+  if (!siteNav.contains(e.target) && !menuHamburger.contains(e.target)) {
+    siteNav.classList.toggle("nav-mobile", false);
+  }
+});

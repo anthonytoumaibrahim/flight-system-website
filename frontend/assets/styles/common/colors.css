@@ -7,3 +7,6 @@
 .text-muted {
   color: var(--muted-col);
 }
+.text-primary {
+  color: var(--primary-col);
+}

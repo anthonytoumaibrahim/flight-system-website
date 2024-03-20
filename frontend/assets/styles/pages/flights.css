@@ -4,7 +4,7 @@
   color: var(--light-col);
   box-shadow: none;
 }
-.site-nav a {
+.site-nav:not(.nav-mobile) a {
   color: var(--light-col) !important;
 }
 .site-nav a:hover,
@@ -90,6 +90,9 @@
 .flight-options {
   display: flex;
   gap: 40px;
+}
+.menu-hamburger img {
+  filter: invert();
 }
 /* Responsiveness */
 @media (max-width: 1024px) {

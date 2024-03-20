@@ -98,6 +98,7 @@ hr {
   padding-block: var(--padding);
   margin-bottom: 20px;
   box-shadow: var(--shadow-md);
+  position: relative;
 }
 .site-header .container {
   display: flex;
@@ -117,9 +118,43 @@ hr {
   color: var(--primary-col);
   font-weight: bold;
 }
+.menu-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.menu-hamburger img {
+  width: 44px;
+  height: 44px;
+}
+.nav-mobile {
+  display: flex !important;
+  background-color: var(--light-col);
+  color: var(--dark-col);
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  left: 0;
+  padding: 40px;
+  flex-direction: column;
+  z-index: 2;
+  box-shadow: var(--shadow-md);
+}
 /* Responsiveness */
 @media (max-width: 1024px) {
   .site-nav a:not(.button) {
     font-size: 1rem;
+  }
+  .site-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+  }
+  .menu-hamburger {
+    display: block;
+  }
+  .site-nav {
+    display: none;
   }
 }
