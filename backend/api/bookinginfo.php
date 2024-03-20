@@ -1,5 +1,5 @@
 <?php
-
+require_once("../config.php");
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $sql = "SELECT booking.booking_id, flight.airline_name, flight.flight_number, flight.depart_datetime, flight.arrival_datetime, flight.flight_price, client.fullname, client.email, client.client_phonenumber, payment.status AS payment_status
             FROM booking

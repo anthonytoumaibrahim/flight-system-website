@@ -1,5 +1,5 @@
 <?php
-
+require_once("../config.php");
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
   $sql = "SELECT COUNT(*) AS user_count FROM client";
   $result = $mysqli->query($sql);

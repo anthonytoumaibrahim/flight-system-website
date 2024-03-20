@@ -23,8 +23,6 @@
     <!-- Styles -->
 
     <link rel="stylesheet" href="../../assets/styles/pages/admin.css" />
-
-    <!-- Scripts -->
     
   </head>
   <body>
@@ -91,20 +89,20 @@
           <li>
             <i class="bx bx-cart-add"></i>
               <span class="info">
-                <h3>180</h3>
+                <h3 id="total-bookings">180</h3>
                 <p>Total Bookings</p>
               </span>
               <li>
                 <i class="bx bx-dollar"></i>
                   <span class="info">
-                    <h3>$2,000</h3>
+                    <h3 id="total-revenue">$2,000</h3>
                     <p>Revenue</p>
                   </span>
               </li>
               <li>
                 <i class="bx bx-user"></i>
                   <span class="info">
-                    <h3>40</h3>
+                    <h3 id="user-count">40</h3>
                     <p>Total Users</p>
                   </span>
               </li>
@@ -126,7 +124,7 @@
                   <th>Status</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="bookings-table">
                 <tr>
                   <td>1</td>
                   <td>132131</td>
@@ -156,5 +154,5 @@
     </div>
   </body>
     <script src="../../assets/scripts/main.js"></script>
-    <script src="/frontend/assets/scripts/pages/admin.js"></script>
+    <script src="../../assets/scripts/pages/admin.js"></script>
 </html>

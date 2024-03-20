@@ -11,6 +11,11 @@ const API_URL = {
     book: BASE_API_URL + "/booking.php",
     history: BASE_API_URL + "/bookinghistory.php",
   },
+  admin: {
+    fetchBookings: BASE_API_URL + "/bookinginfo.php",
+    countUsers: BASE_API_URL + "/countusers.php",
+    countRevenue: BASE_API_URL + "/countrevenue.php",
+  },
 };
 
 const logoutLinks = document.querySelectorAll(".logout-link");
@@ -63,14 +68,14 @@ logoutLinks.forEach((element) =>
   })
 );
 
-menuHamburger.addEventListener("click", () => {
+menuHamburger?.addEventListener("click", () => {
   siteNav.classList.toggle("nav-mobile");
 });
 
 // Detect click outside menu to hide it
 // Thanks to: https://stackoverflow.com/a/28432139
 document.addEventListener("click", (e) => {
-  if (!siteNav.contains(e.target) && !menuHamburger.contains(e.target)) {
-    siteNav.classList.toggle("nav-mobile", false);
+  if (!siteNav?.contains(e.target) && !menuHamburger?.contains(e.target)) {
+    siteNav?.classList.toggle("nav-mobile", false);
   }
 });
