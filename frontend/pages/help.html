@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ's | Flight System</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/styles/common/main.css" />
+    <link rel="stylesheet" href="../assets/styles/common/colors.css" />
+    <link rel="stylesheet" href="../assets/styles/common/utilities.css" />
+    <link rel="stylesheet" href="../assets/styles/common/buttons.css" />
+    <link rel="stylesheet" href="../assets/styles/common/forms.css" />
+    <link rel="stylesheet" href="../assets/styles/pages/faqs.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <h1>Flightio</h1>
+        <nav class="site-nav">
+          <a href="../index.html">Home</a>
+          <a href="./profile.html">Profile</a>
+          <a href="./bookings.html">My Bookings</a>
+          <a href="./help.html" class="active">Help</a>
+          <a
+            href="./auth.html"
+            class="button button-error button-sm logout-link"
+            >Log out</a
+          >
+        </nav>
+        <button class="menu-hamburger">
+          <img src="../assets/images/icons/bars.svg" />
+        </button>
+      </div>
+    </header>
+
+    <main class="container">
+      <h2>Frequently asked questions</h2>
+      <p id="response-message">Have questions? We’re here to help you!</p>
+      <div id="flights"></div>
+
+      <!-- Start of new FAQ form -->
+      <form id="faq-form">
+        <div class="form-group">
+          <label for="flightNumber">Flight Number:</label>
+          <input type="text" id="flightNumber" name="flightNumber" required />
+        </div>
+
+        <div class="form-group">
+          <label for="faqTopic">FAQ Topic:</label>
+          <select id="faqTopic" name="faqTopic">
+            <option value="1">Baggage</option>
+            <option value="2">Check-in</option>
+            <option value="3">Delays and Cancellations</option>
+            <option value="4">Refunds</option>
+            <option value="5">COVID-19 Measures</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="faqText">FAQ Text:</label>
+          <textarea id="faqText" name="faqText" rows="4" required></textarea>
+        </div>
+
+        <button type="submit" class="button">Submit FAQ</button>
+        <div class="divider"></div>
+      </form>
+    </main>
+
+    <main class="container">
+      <div class="wrapper">
+        <h1>Frequently Asked Questions</h1>
+
+        <div class="faq">
+          <button class="accordion">
+            Which Internet browsers can we use to book on our website?
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="pannel">
+            <p>- Google Chrome</p>
+            <p>- Firefox</p>
+            <p>- Internet Explorer</p>
+            <p>- Safari</p>
+          </div>
+        </div>
+
+        <div class="faq">
+          <button class="accordion">
+            What should I do if I didn’t receive a confirmation page?
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="pannel">
+            <p>
+              Please check your inbox to see if confirmation mail with PDF
+              ticket is well received; if not, please send an email to
+              "callcenter@se.com.lb".
+            </p>
+          </div>
+        </div>
+
+        <div class="faq">
+          <button class="accordion">
+            When do I check in online?
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="pannel">
+            <p>
+              Online check-in can be performed between 48 hours and 2 hours
+              prior to flight departure.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq">
+          <button class="accordion">
+            I’m traveling with my baby, can I check in online?
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="pannel">
+            <p>
+              No, for more information please refer to “registration conditions”
+              upon check in
+            </p>
+            <p>Online check in WILL NOT apply:</p>
+            <p>- If you do not hold the necessaryvalid travel documents.</p>
+            <p>- If your baggage includes pets or live animals.</p>
+            <p>- If your departure city is: Beirut.</p>
+          </div>
+        </div>
+
+        <div class="faq">
+          <button class="accordion">
+            Can I change my seat after the check in?
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="pannel">
+            <p>Yes, click again on “check in” and then select “change seat”.</p>
+          </div>
+        </div>
+
+        <div class="faq">
+          <button class="accordion">
+            Can I modify my reward ticket online from Manage Booking?
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="pannel">
+            <p>
+              No, to modify/change booking for reward ticket from miles, please
+              refer to our call center or sales offices.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+          acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            this.parentElement.classList.toggle("active");
+
+            var pannel = this.nextElementSibling;
+
+            if (pannel.style.display === "block") {
+              pannel.style.display = "none";
+            } else {
+              pannel.style.display = "block";
+            }
+          });
+        }
+      </script>
+    </main>
+
+    <script src="../assets/scripts/main.js" defer></script>
+  </body>
+</html>
