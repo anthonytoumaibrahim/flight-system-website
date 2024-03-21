@@ -15,6 +15,7 @@ const API_URL = {
     fetchBookings: BASE_API_URL + "/bookinginfo.php",
     countUsers: BASE_API_URL + "/countusers.php",
     countRevenue: BASE_API_URL + "/countrevenue.php",
+    addFlight: BASE_API_URL + "/add-delete-flights.php"
   },
 };
 

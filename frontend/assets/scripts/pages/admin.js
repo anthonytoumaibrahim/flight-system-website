@@ -154,3 +154,24 @@ function displayTotalRevenue(totalRevenue) {
 fetchTotalRevenue();
 fetchUserCount();
 fetchBookings();
+
+// Flight Management form
+const addFlightForm = document.getElementById("create-flight-form");
+addFlightForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const params = new FormData(addFlightForm);
+  // https://stackoverflow.com/a/46774073
+  let jsonParams = {};
+  params.forEach((v, k) => (jsonParams[k] = v));
+  jsonParams = JSON.stringify(jsonParams);
+  const response = await fetch(API_URL.admin.addFlight, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: jsonParams,
+  });
+  const data = await response.json();
+  alert("Flight added successfully");
+  addFlightForm.reset();
+});
