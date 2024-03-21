@@ -1,3 +1,8 @@
+// If user isn't admin, redirect to home
+if (getLoggedInUser().role !== "admin") {
+  window.location.href = "../../index.html";
+}
+
 const sideLinksEl = document.querySelectorAll(
   ".sidebar .side-menu li a:not(.logout)"
 );
@@ -15,33 +20,34 @@ sideLinksEl.forEach((links) => {
 const menuBar = document.querySelector(".content nav .bx.bx-menu");
 const sideBarEl = document.querySelector(".sidebar");
 
-
-
 menuBar.addEventListener("click", () => {
   sideBarEl.classList.toggle("close");
 });
 
-const searchBtn = document.querySelector(".content nav form .form-input button");
-const searchIcon = document.querySelector(".content nav form .form-input button .bx");
-const searchForm = document.querySelector('.content nav form')
+const searchBtn = document.querySelector(
+  ".content nav form .form-input button"
+);
+const searchIcon = document.querySelector(
+  ".content nav form .form-input button .bx"
+);
+const searchForm = document.querySelector(".content nav form");
 
-searchBtn.addEventListener("Click", function(e){
-  if(window.innerWidth < 576){
+searchBtn.addEventListener("Click", function (e) {
+  if (window.innerWidth < 576) {
     e.preventDefault;
-    searchForm.classList.toggle('show');
-    if(searchForm.classList.contains('show')){
-      searchIcon.classList.replace("bx-search" , "bx-x");
-    }else{
+    searchForm.classList.toggle("show");
+    if (searchForm.classList.contains("show")) {
+      searchIcon.classList.replace("bx-search", "bx-x");
+    } else {
       searchIcon.classList.replace("bx-x", "bx-search");
     }
   }
-})
-
+});
 
 window.addEventListener("resize", () => {
-  if(window.innerWidth < 768){
-    sideBarEl.classList.add('close');
-  }else{
+  if (window.innerWidth < 768) {
+    sideBarEl.classList.add("close");
+  } else {
     sideBarEl.classList.remove("close");
   }
 });
@@ -51,22 +57,16 @@ const darkIcon = document.querySelector(".side-menu ul li .bx.bx-moon");
 
 darkEl.addEventListener("click", () => {
   document.body.classList.toggle("dark");
-  
-  if(document.body.classList.contains('dark')){
-    darkIcon.classList.replace("bx-moon", "bx-sun");
-  }else{
-    darkIcon.classList.replace("bx-sun", "bx-moon");
 
+  if (document.body.classList.contains("dark")) {
+    darkIcon.classList.replace("bx-moon", "bx-sun");
+  } else {
+    darkIcon.classList.replace("bx-sun", "bx-moon");
   }
-})
+});
 
 function fetchBookings() {
-  fetch("bookinginfo.php", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
+  fetch(API_URL.admin.fetchBookings)
     .then((response) => {
       if (!response.ok) {
         throw new Error("Failed to fetch bookings");
@@ -74,8 +74,8 @@ function fetchBookings() {
       return response.json();
     })
     .then((data) => {
-      console.log("Bookings:", data);
       displayBookings(data);
+      document.getElementById("total-bookings").textContent = data.length ?? 0;
     })
     .catch((error) => {
       console.error("Error fetching bookings:", error.message);
@@ -83,28 +83,22 @@ function fetchBookings() {
 }
 
 function displayBookings(bookings) {
-  const bookingsContainer = document.getElementById("bookings-container");
+  const bookingsContainer = document.getElementById("bookings-table");
   bookingsContainer.innerHTML = "";
-
+  let id = 0;
   bookings.forEach((booking) => {
-    const bookingElement = document.createElement("div");
+    id++;
+    const bookingElement = document.createElement("tr");
     bookingElement.classList.add("booking");
 
     const html = `
-        <p><strong>Booking ID:</strong> ${booking.booking_id}</p>
-        <p><strong>Airline Name:</strong> ${booking.airline_name}</p>
-        <p><strong>Flight Number:</strong> ${booking.flight_number}</p>
-        <p><strong>Departure Date/Time:</strong> ${new Date(
-          booking.depart_datetime
-        ).toLocaleString()}</p>
-        <p><strong>Arrival Date/Time:</strong> ${new Date(
-          booking.arrival_datetime
-        ).toLocaleString()}</p>
-        <p><strong>Flight Price:</strong> ${booking.flight_price}</p>
-        <p><strong>Passenger Name:</strong> ${booking.fullname}</p>
-        <p><strong>Email:</strong> ${booking.email}</p>
-        <p><strong>Phone Number:</strong> ${booking.client_phonenumber}</p>
-        <p><strong>Payment Status:</strong> ${booking.payment_status}</p>
+        <td>${id}</td>
+        <td>${booking.booking_id}</td>
+        <td>${booking.airline_name} ${booking.flight_number}</td>
+        <td>${new Date(booking.depart_datetime).toLocaleString()} - ${new Date(
+      booking.arrival_datetime
+    ).toLocaleString()}</td>
+        <td><span class="status completed">Active</span></td>
       `;
     bookingElement.innerHTML = html;
 
@@ -112,15 +106,8 @@ function displayBookings(bookings) {
   });
 }
 
-document.addEventListener("DOMContentLoaded", fetchBookings);
-
 function fetchUserCount() {
-  fetch("countusers.php", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
+  fetch(API_URL.admin.countUsers)
     .then((response) => {
       if (!response.ok) {
         throw new Error("Failed to fetch user count");
@@ -128,7 +115,6 @@ function fetchUserCount() {
       return response.json();
     })
     .then((data) => {
-      console.log("User count:", data.user_count);
       displayUserCount(data.user_count);
     })
     .catch((error) => {
@@ -140,15 +126,8 @@ function displayUserCount(userCount) {
   userCountElement.textContent = userCount;
 }
 
-document.addEventListener("DOMContentLoaded", fetchUserCount);
-
 function fetchTotalRevenue() {
-  fetch("countrevenue.php", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
+  fetch(API_URL.admin.countRevenue)
     .then((response) => {
       if (!response.ok) {
         throw new Error("Failed to fetch total revenue");
@@ -156,7 +135,6 @@ function fetchTotalRevenue() {
       return response.json();
     })
     .then((data) => {
-      console.log("Total revenue:", data.total_revenue);
       displayTotalRevenue(data.total_revenue);
     })
     .catch((error) => {
@@ -166,7 +144,13 @@ function fetchTotalRevenue() {
 
 function displayTotalRevenue(totalRevenue) {
   const totalRevenueElement = document.getElementById("total-revenue");
-  totalRevenueElement.textContent = totalRevenue;
+  totalRevenueElement.textContent = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  }).format(totalRevenue);
 }
 
-document.addEventListener("DOMContentLoaded", fetchTotalRevenue);
+fetchTotalRevenue();
+fetchUserCount();
+fetchBookings();
