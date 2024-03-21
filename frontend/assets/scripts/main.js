@@ -31,6 +31,7 @@ const getLoggedInUser = () => {
   return false;
 };
 const setLoggedInUser = (id, token, role = "user") => {
+  // For logout, reset localstorage item
   if (id === -1) {
     localStorage.removeItem("user");
     return;
