@@ -430,6 +430,8 @@ main .bottom_data .flights table td {
   background-color: var(--yellow);
 }
 
+
+
 @media (max-width: 768px) {
   .sidebar {
     width: 200px;
